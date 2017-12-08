@@ -37,89 +37,89 @@ const int ARRAY_SIZE = 7;
 
 int main()
 {
-	int used;
-	double s[ARRAY_SIZE], diversScore, degreeOfDifficulty;
+    int used;
+    double s[ARRAY_SIZE], diversScore, degreeOfDifficulty;
 
-	input(s, degreeOfDifficulty, ARRAY_SIZE, used);
-	computeOverallScore(s, degreeOfDifficulty, used, diversScore);
-	output(s, diversScore);
+    input(s, degreeOfDifficulty, ARRAY_SIZE, used);
+    computeOverallScore(s, degreeOfDifficulty, used, diversScore);
+    output(s, diversScore);
 
-	return 0;
+    return 0;
 }
 
 void input(double scores[], double& degreeOfDifficulty, int arraySize, int& numberUsed)
 {
-	cout<<"Enter degree of difficulty: ";
-	cin>>degreeOfDifficulty;
+    cout<<"Enter degree of difficulty: ";
+    cin>>degreeOfDifficulty;
 
-	cout<<"Enter in 7 scores: ";
+    cout<<"Enter in 7 scores: ";
 
-	for (int i = 0; i < arraySize; i++)
-		cin>>scores[i];
+    for (int i = 0; i < arraySize; i++)
+        cin>>scores[i];
 
-	numberUsed = arraySize;
+    numberUsed = arraySize;
 }
 
 void computeOverallScore(double scores[], double degreeOfDifficulty, int& numberUsed, double& overallScore)
 {
-	deleteHighestScore(scores, numberUsed);
-	deleteLowestScore(scores, numberUsed);
+    deleteHighestScore(scores, numberUsed);
+    deleteLowestScore(scores, numberUsed);
 
-	double total = 0;
+    double total = 0;
 
-	for (int i = 0; i < numberUsed; i++)
-		total+=scores[i];
+    for (int i = 0; i < numberUsed; i++)
+        total+=scores[i];
 
-	overallScore = (total*degreeOfDifficulty)*0.6;
+    overallScore = (total*degreeOfDifficulty)*0.6;
 }
 
 void deleteHighestScore(double scores[], int& numberUsed)
 {
-	double highestScore = scores[0];
-	int indexOfHighestScore = 0;
+    double highestScore = scores[0];
+    int indexOfHighestScore = 0;
 
-	for (int i = 1; i < numberUsed; i++)
-	{
-		if(scores[i] > highestScore)
-		{
-			highestScore = scores[i];
-			indexOfHighestScore = i;
-		}
-	}
+    for (int i = 1; i < numberUsed; i++)
+    {
+        if(scores[i] > highestScore)
+        {
+            highestScore = scores[i];
+            indexOfHighestScore = i;
+        }
+    }
 
-	pushElementsForward(scores, numberUsed, indexOfHighestScore);
+    pushElementsForward(scores, numberUsed, indexOfHighestScore);
 }
 
 
 void deleteLowestScore(double scores[], int& numberUsed)
 {
-	double lowestScore = scores[0];
-	int indexOfLowestScore = 0;
+    double lowestScore = scores[0];
+    int indexOfLowestScore = 0;
 
-	for (int i = 1; i < numberUsed; i++)
-	{
-		if(scores[i] < lowestScore)
-		{
-			lowestScore = scores[i];
-			indexOfLowestScore = i;
-		}
-	}
+    for (int i = 1; i < numberUsed; i++)
+    {
+        if(scores[i] < lowestScore)
+        {
+            lowestScore = scores[i];
+            indexOfLowestScore = i;
+        }
+    }
 
-	pushElementsForward(scores, numberUsed, indexOfLowestScore);
+    pushElementsForward(scores, numberUsed, indexOfLowestScore);
 }
 
 void pushElementsForward(double scores[], int& numberUsed, int startIndex)
 {
-	for (int i = startIndex; i < numberUsed; i++)
-		scores[i] = scores[i + 1];
-	
-	numberUsed--;
+    for (int i = startIndex; i < numberUsed; i++)
+        scores[i] = scores[i + 1];
+
+    numberUsed--;
 }
 
 void output(double s[], double overallScore)
 {
-	cout.setf(ios::showpoint);
-	cout.setf(ios::fixed);
-	cout.precision(1);
-	cout<<"The divers score is "<<overallScore<<"\n\n";
+    cout.setf(ios::showpoint);
+    cout.setf(ios::fixed);
+    cout.precision(1);
+    cout<<"The divers score is "<<overallScore<<"\n\n";
 }
